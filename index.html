@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" , initial-scale="1" />
+    <title>Intive Patronage 2023</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Open+Sans"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.1.2/chart.umd.min.js"
+      integrity="sha512-KTyzZ0W6S8dUq9WIt8fSflj2ArYRGcGNIU5QcB1skGGd1EPFMupHZSexEsFFX18tZK4eO0iGGSZGuyrNIqjV8g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.1.2/chartjs-plugin-annotation.min.js"
+      integrity="sha512-6dmCqRV2/iXtbm8z/9+7bzLhOkmXvq9R6WoR+8QgrojgMU0/Nin+/eaWouEGEU5ishyKDYgRoiq7kURCVmwmqw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navBar">
+        <button class="button btnLog">Logowanie</button>
+        <button class="button btnRegister">Rejestracja</button>
+
+        <button class="btnChangeLanguage"><img class="appLanguage" /></button>
+
+        <div class="loggedInUser"></div>
+        <button class="button btnLogOut" hidden>Wyloguj</button>
+      </nav>
+    </header>
+
+    <div class="main">
+      <section class="section-greeting">
+        <h1>Intive Patronage 2023</h1>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium
+          ipsa natus porro, repellendus sapiente sint totam! Dignissimos
+          excepturi minus quisquam rerum ullam? Dolores explicabo nemo quasi.
+          Explicabo iusto rem ullam!
+        </p>
+      </section>
+
+      <section class="section-forms" hidden>
+        <div class="registerForm-div margins form-style" hidden>
+          <form class="registerForm">
+            <div class="form-row-flex">
+              <label id="usernameRegister-label" for="usernameRegister"
+                >Nazwa użytkownika</label
+              >
+              <input
+                type="text"
+                id="usernameRegister"
+                name="usernameRegister"
+                autocomplete="off"
+                required
+                oninput="setCustomValidity('')"
+              />
+            </div>
+
+            <div class="form-row-flex">
+              <label id="passwordRegister-label" for="passwordRegister"
+                >Hasło</label
+              >
+              <input
+                type="password"
+                id="passwordRegister"
+                name="userPasswordRegister"
+                required
+                oninput="setCustomValidity('')"
+              />
+            </div>
+
+            <div class="form-row-flex">
+              <label id="email-label" for="email">E-mail</label>
+              <input
+                type="text"
+                id="email"
+                name="userEmail"
+                autocomplete="off"
+                required
+                oninput="setCustomValidity('')"
+              />
+            </div>
+
+            <div class="form-row-flex">
+              <label id="emailConfirmation-label" for="emailConfirmation"
+                >Potwierdź e-mail</label
+              >
+              <!--              <div class="form-validation-error"></div>-->
+              <input
+                type="text"
+                id="emailConfirmation"
+                name="userEmailConfirmation"
+                autocomplete="off"
+                required
+                oninput="setCustomValidity('')"
+              />
+            </div>
+
+            <button
+              class="form-submit-button form-submit-button-register"
+              type="submit"
+            >
+              Zarejestruj
+            </button>
+          </form>
+        </div>
+
+        <div class="loginForm-div margins form-style" hidden>
+          <form class="loginForm">
+            <div class="form-row-flex">
+              <label id="usernameLogin-label" for="usernameLogin"
+                >Nazwa użytkownika / Email</label
+              >
+              <input
+                type="text"
+                id="usernameLogin"
+                name="usernameLogin"
+                autocomplete="off"
+                required
+                oninput="setCustomValidity('')"
+              />
+            </div>
+
+            <div class="form-row-flex">
+              <label id="passwordLogin-label" for="passwordLogin">Hasło</label>
+              <input
+                type="password"
+                id="passwordLogin"
+                name="passwordLogin"
+                required
+              />
+            </div>
+
+            <button
+              class="form-submit-button form-submit-button-login"
+              type="submit"
+            >
+              Zaloguj
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <section class="section-charts" hidden>
+        <h2 class="section-charts-heading">Wykresy</h2>
+        <div class="charts-div">
+          <div class="chart doughnut-chart">
+            <canvas id="doughnutChart"></canvas>
+          </div>
+          <div class="chart bar-chart chart-hidden">
+            <canvas id="barChart"></canvas>
+          </div>
+
+          <!-- Next/prev anchors        -->
+          <div class="changeChartDiv">
+            <button class="btnChangeChart">
+              <a class="anchor-prev-chart">&#10094;</a>
+            </button>
+            <button class="btnChangeChart">
+              <a class="anchor-next-chart">&#10095;</a>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-transactions" hidden>
+        <div class="filter-form-row-flex">
+          <h2 class="section-transactions-heading">Historia transakcji</h2>
+          <button class="button btnShowAllTransactions" type="click">
+            Pokaż wszystkie transakcje
+          </button>
+        </div>
+        <div class="filterForm-div">
+          <form class="filterForm">
+            <div class="filter-form-row-flex">
+              <label id="transactionTypeFilter-label" for="transactionType"
+                >Filtruj transakcje</label
+              >
+              <select id="transactionType" name="transactionType"></select>
+
+              <button class="button btnFilterTransaction" type="submit">
+                Pokaż wybrane transakcje
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div class="searchForm-div">
+          <form class="searchForm">
+            <div class="filter-form-row-flex">
+              <label id="searchValue-label" for="searchValue"
+                >Wyszukaj transakcje po opisie</label
+              >
+              <input type="text" id="searchValue" name="searchValue" />
+              <button class="button btnSearchTransactions" type="submit">
+                Szukaj transakcji
+              </button>
+            </div>
+          </form>
+        </div>
+        <div
+          class="transactions-description transactions-description-desktop singleTransaction singleTransaction-desktop"
+        ></div>
+        <div
+          class="transactions-description transactions-description-mobile singleTransaction singleTransaction-mobile"
+        ></div>
+        <div class="transactions form-style"></div>
+      </section>
+    </div>
+
+    <script type="module" src="js/controller.js"></script>
+  </body>
+</html>
