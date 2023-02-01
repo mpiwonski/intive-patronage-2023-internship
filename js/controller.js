@@ -24,7 +24,12 @@ class Controller {
       this.model.getDataForDoughnutChart.bind(this.model),
       this.model.getDataForBarChart.bind(this.model),
       this.model.getTransactionTypesEng.bind(this.model),
-      this.model.getTransactionTypes.bind(this.model)
+      this.model.getTransactionTypes.bind(this.model),
+      this.model.getLoggedUserData,
+      this.model.getAPIData.bind(this.model),
+      this.model.getFilteredTransactions.bind(this.model),
+      this.model.getSearchData.bind(this.model),
+      this.model.getIconsSrcObj.bind(this.model)
     );
   }
 
@@ -149,7 +154,8 @@ class Controller {
       "",
       this.model.getTransactionTypes.bind(this.model),
       this.model.getIconsSrcObj.bind(this.model),
-      this.model.getPolishLang.bind(this.model)
+      this.model.getPolishLang.bind(this.model),
+      this.model.getTransactionTypesEng.bind(this.model)
     );
   }
 
@@ -157,7 +163,9 @@ class Controller {
     this.view.changeUserInterfaceBasedOnLanguage(
       this.model.getPolishLang.bind(this.model),
       this.model.getTransactionTypes.bind(this.model),
-      this.model.getTransactionTypesEng.bind(this.model)
+      this.model.getTransactionTypesEng.bind(this.model),
+      this.model.isUserLoggedIn,
+      this.model.getLoggedUserData
     );
   }
 }

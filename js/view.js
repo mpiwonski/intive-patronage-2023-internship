@@ -85,15 +85,17 @@ class View {
   changeUserInterfaceBasedOnLanguage(
     getPolishLang,
     getTransactionTypes,
-    getTransactionTypesEng
+    getTransactionTypesEng,
+    isUserLoggedIn,
+    getLoggedUserData
   ) {
     const isPolishLang = getPolishLang();
     this.btnLogin.textContent = isPolishLang ? "Logowanie" : "Log in";
     this.btnRegister.textContent = isPolishLang ? "Rejestracja" : "Sign up";
     this.btnLogOut.textContent = isPolishLang ? "Wyloguj" : "Log out";
 
-    if (localStorage.getItem("loggedUser")) {
-      const userObj = JSON.parse(localStorage.getItem("loggedUser"));
+    if (isUserLoggedIn()) {
+      const userObj = getLoggedUserData();
 
       document.querySelector(".loggedInUserName").textContent = isPolishLang
         ? `Zalogowano jako ${userObj.username}`
@@ -656,10 +658,10 @@ class View {
 
       this.transactionTypeSelect.innerHTML = ``;
 
-      const transactionTypesFilterForm = isPolishLang()
+      const transactionTypesSpecific = isPolishLang()
         ? getTransactionTypes
         : getTransactionTypesEng;
-      this.displayFilterForm(transactionTypesFilterForm);
+      this.displayFilterForm(transactionTypesSpecific);
 
       // WORKAROUND SOLUTION (eliminating double event listeners)
       this.restartTransactionsDiv();
@@ -670,7 +672,7 @@ class View {
         if (window.innerWidth > 768) {
           this.displayTransactionsDesktopView(
             filteredTransactions,
-            transactionTypes,
+            transactionTypesSpecific(),
             document.querySelector(".transactions"),
             iconsObj,
             isPolishLang
@@ -690,7 +692,7 @@ class View {
         if (window.innerWidth > 768) {
           this.displayTransactionsDesktopView(
             searchedTransactions,
-            transactionTypes,
+            transactionTypesSpecific(),
             document.querySelector(".transactions"),
             iconsObj,
             isPolishLang
@@ -708,7 +710,7 @@ class View {
         if (window.innerWidth > 768) {
           this.displayTransactionsDesktopView(
             transactions,
-            transactionTypes,
+            transactionTypesSpecific(),
             document.querySelector(".transactions"),
             iconsObj,
             isPolishLang
@@ -1242,7 +1244,12 @@ class View {
     doughnutChartData,
     barChartData,
     getTransactionTypesEng,
-    getTransactionTypes
+    getTransactionTypes,
+    loggedUserData,
+    APIData,
+    getFilteredTransactions,
+    searchData,
+    getIcons
   ) {
     this.btnChangeLanguage.addEventListener("click", async () => {
       initPolishLangFlag();
@@ -1252,12 +1259,28 @@ class View {
       this.changeUserInterfaceBasedOnLanguage(
         getPolishLangFlag,
         getTransactionTypes,
-        getTransactionTypesEng
+        getTransactionTypesEng,
+        isUserLoggedIn,
+        loggedUserData
       );
       await this.displayCharts(
         isUserLoggedIn,
         doughnutChartData,
         barChartData,
+        getPolishLangFlag,
+        getTransactionTypesEng
+      );
+
+      await this.displayTransactions(
+        isUserLoggedIn,
+        loggedUserData,
+        APIData,
+        getFilteredTransactions,
+        searchData,
+        "",
+        "",
+        getTransactionTypes,
+        getIcons,
         getPolishLangFlag,
         getTransactionTypesEng
       );
