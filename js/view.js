@@ -1022,7 +1022,8 @@ class View {
     getIcons,
     getRegexPatternsObj,
     doesUserEmailExist,
-    getTransactionTypesEng
+    getTransactionTypesEng,
+    getTransactionTypes
   ) {
     this.loginForm.addEventListener("submit", async (e) => {
       try {
@@ -1080,7 +1081,7 @@ class View {
           searchData,
           "",
           "",
-          doughnutChartData,
+          getTransactionTypes,
           getIcons,
           isPolishLang
         );

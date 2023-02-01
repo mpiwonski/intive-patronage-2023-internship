@@ -70,7 +70,8 @@ class Controller {
       this.model.getIconsSrcObj.bind(this.model),
       this.model.getRegexPatternsObj.bind(this.model),
       this.model.userEmailExists.bind(this.model),
-      this.model.getTransactionTypesEng.bind(this.model)
+      this.model.getTransactionTypesEng.bind(this.model),
+      this.model.getTransactionTypes.bind(this.model)
     );
   }
 
