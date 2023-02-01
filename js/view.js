@@ -82,7 +82,11 @@ class View {
 
   /////// UI CHANGES ///////
 
-  changeUserInterfaceBasedOnLanguage(getPolishLang) {
+  changeUserInterfaceBasedOnLanguage(
+    getPolishLang,
+    getTransactionTypes,
+    getTransactionTypesEng
+  ) {
     const isPolishLang = getPolishLang();
     this.btnLogin.textContent = isPolishLang ? "Logowanie" : "Log in";
     this.btnRegister.textContent = isPolishLang ? "Rejestracja" : "Sign up";
@@ -147,8 +151,11 @@ class View {
       ? "Szukaj transakcji"
       : "Search transactions";
 
-    this.transactionsDescriptionDesktop.innerHTML = ``;
-    this.transactionsDescriptionMobile.innerHTML = ``;
+    const transactionTypes = isPolishLang
+      ? getTransactionTypes
+      : getTransactionTypesEng;
+    this.displayFilterForm(transactionTypes);
+
     this.displayTransactionsDescriptionDesktop(getPolishLang);
     this.displayTransactionsDescriptionMobile(getPolishLang);
   }
@@ -277,7 +284,7 @@ class View {
   displayLoggedInUserName(isUserLoggedIn, getLoggedUserData, isPolishLang) {
     if (!isUserLoggedIn()) return;
     const userObj = getLoggedUserData();
-    console.log(userObj);
+
     this.hideGreetingSection();
 
     this.hideRegisterBtn();
@@ -294,6 +301,7 @@ class View {
   }
 
   displayTransactionsDescriptionDesktop(isPolishLang) {
+    this.transactionsDescriptionDesktop.innerHTML = ``;
     const html = `
           <span>${isPolishLang() ? "Data" : "Date"}</span>
           <span>${isPolishLang() ? "Typ transakcji" : "Transaction type"}</span>
@@ -307,6 +315,7 @@ class View {
   }
 
   displayTransactionsDescriptionMobile(isPolishLang) {
+    this.transactionsDescriptionMobile.innerHTML = ``;
     const html = `
           <span>${isPolishLang() ? "Typ transakcji" : "Transaction type"}</span>
           <span>${isPolishLang() ? "Opis" : "Description"}</span>
@@ -476,6 +485,7 @@ class View {
       filterOptionsHTML += html;
     });
 
+    this.transactionTypeSelect.innerHTML = ``;
     this.transactionTypeSelect.insertAdjacentHTML(
       "afterbegin",
       filterOptionsHTML
@@ -632,7 +642,8 @@ class View {
     searchTerm = "",
     getTransactionTypes,
     getIcons,
-    isPolishLang
+    isPolishLang,
+    getTransactionTypesEng
   ) {
     try {
       if (!isUserLoggedIn()) return;
@@ -645,7 +656,10 @@ class View {
 
       this.transactionTypeSelect.innerHTML = ``;
 
-      this.displayFilterForm(getTransactionTypes);
+      const transactionTypesFilterForm = isPolishLang()
+        ? getTransactionTypes
+        : getTransactionTypesEng;
+      this.displayFilterForm(transactionTypesFilterForm);
 
       // WORKAROUND SOLUTION (eliminating double event listeners)
       this.restartTransactionsDiv();
@@ -691,7 +705,6 @@ class View {
           );
         }
       } else {
-        console.log(transactions);
         if (window.innerWidth > 768) {
           this.displayTransactionsDesktopView(
             transactions,
@@ -999,7 +1012,8 @@ class View {
           "",
           getTransactionTypes,
           getIcons,
-          isPolishLang
+          isPolishLang,
+          getTransactionTypesEng
         );
       } catch (e) {
         console.log(e);
@@ -1083,7 +1097,8 @@ class View {
           "",
           getTransactionTypes,
           getIcons,
-          isPolishLang
+          isPolishLang,
+          getTransactionTypesEng
         );
       } catch (e) {
         console.log(e);
@@ -1226,14 +1241,19 @@ class View {
     isUserLoggedIn,
     doughnutChartData,
     barChartData,
-    getTransactionTypesEng
+    getTransactionTypesEng,
+    getTransactionTypes
   ) {
     this.btnChangeLanguage.addEventListener("click", async () => {
       initPolishLangFlag();
       togglePolishLangFlag();
 
       this.flagLanguageImage.src = setFlagImg();
-      this.changeUserInterfaceBasedOnLanguage(getPolishLangFlag);
+      this.changeUserInterfaceBasedOnLanguage(
+        getPolishLangFlag,
+        getTransactionTypes,
+        getTransactionTypesEng
+      );
       await this.displayCharts(
         isUserLoggedIn,
         doughnutChartData,

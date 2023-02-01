@@ -23,7 +23,8 @@ class Controller {
       this.model.isUserLoggedIn,
       this.model.getDataForDoughnutChart.bind(this.model),
       this.model.getDataForBarChart.bind(this.model),
-      this.model.getTransactionTypesEng.bind(this.model)
+      this.model.getTransactionTypesEng.bind(this.model),
+      this.model.getTransactionTypes.bind(this.model)
     );
   }
 
@@ -154,7 +155,9 @@ class Controller {
 
   maintainUserInterfaceBasedOnLanguageAfterRefresh() {
     this.view.changeUserInterfaceBasedOnLanguage(
-      this.model.getPolishLang.bind(this.model)
+      this.model.getPolishLang.bind(this.model),
+      this.model.getTransactionTypes.bind(this.model),
+      this.model.getTransactionTypesEng.bind(this.model)
     );
   }
 }
