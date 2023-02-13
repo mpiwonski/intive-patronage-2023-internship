@@ -89,7 +89,8 @@ class Controller {
       this.model.getFilteredTransactions.bind(this.model),
       this.model.getSearchData.bind(this.model),
       this.model.getTransactionTypes.bind(this.model),
-      this.model.getIconsSrcObj.bind(this.model)
+      this.model.getIconsSrcObj.bind(this.model),
+      this.model.getPolishLang.bind(this.model)
     );
   }
 
@@ -101,7 +102,8 @@ class Controller {
       this.model.getFilteredTransactions.bind(this.model),
       this.model.getSearchData.bind(this.model),
       this.model.getTransactionTypes.bind(this.model),
-      this.model.getIconsSrcObj.bind(this.model)
+      this.model.getIconsSrcObj.bind(this.model),
+      this.model.getPolishLang.bind(this.model)
     );
   }
 
@@ -120,7 +122,8 @@ class Controller {
       this.model.getFilteredTransactions.bind(this.model),
       this.model.getSearchData.bind(this.model),
       this.model.getTransactionTypes.bind(this.model),
-      this.model.getIconsSrcObj.bind(this.model)
+      this.model.getIconsSrcObj.bind(this.model),
+      this.model.getPolishLang.bind(this.model)
     );
   }
 

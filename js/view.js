@@ -1115,7 +1115,8 @@ class View {
     filteredTransactions,
     searchData,
     getTransactionTypes,
-    getIcons
+    getIcons,
+    isPolishLang
   ) {
     this.filterForm.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -1130,7 +1131,8 @@ class View {
         selectedOption,
         "",
         getTransactionTypes,
-        getIcons
+        getIcons,
+        isPolishLang
       );
     });
   }
@@ -1142,7 +1144,8 @@ class View {
     filteredTransactions,
     searchData,
     getTransactionTypes,
-    getIcons
+    getIcons,
+    isPolishLang
   ) {
     this.searchForm.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -1159,7 +1162,8 @@ class View {
         "",
         searchTerm,
         getTransactionTypes,
-        getIcons
+        getIcons,
+        isPolishLang
       );
     });
   }
@@ -1218,7 +1222,8 @@ class View {
     filteredTransactions,
     searchData,
     getTransactionTypes,
-    getIcons
+    getIcons,
+    isPolishLang
   ) {
     this.btnShowAllTransactions.addEventListener("click", async () => {
       await this.displayTransactions(
@@ -1230,7 +1235,8 @@ class View {
         "",
         "",
         getTransactionTypes,
-        getIcons
+        getIcons,
+        isPolishLang
       );
     });
   }
